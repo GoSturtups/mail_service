@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+package mail_service;
+
+// Определение сервиса MailService
+service MailService {
+    // Метод SendMail принимает MailRequest и возвращает MailResponse
+    rpc SendMail (MailRequest) returns (MailResponse);
+}
+
+// Сообщение с параметрами для отправки письма
+message MailRequest {
+    string from_address = 1;
+    string from_name = 2;
+    string to_address = 3;
+    string subject = 4;
+    string body = 5;
+    repeated Attachment attachments = 6;
+}
+
+// Сообщение для ответа с результатом выполнения
+message MailResponse {
+    bool success = 1;
+    string message = 2;  // Для возможных сообщений об ошибках или дополнительной информации
+}
+
+// Сообщение для вложений
+message Attachment {
+    string filename = 1;
+    bytes content = 2;
+    string content_type = 3;  // MIME тип контента
+}
