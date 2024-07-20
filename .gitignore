@@ -8,3 +8,4 @@ build/
 /stub/build/
 /stub-lite/build/
 .env
+!/server/build/libs/server-all.jar

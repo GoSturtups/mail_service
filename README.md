@@ -7,7 +7,11 @@ A service that allows email to be sent via a grpc interface and a third-party SM
 1. Clone the repository:
   
    ```sh
-   git clone git@github.com:GoSturtups/mail_service.git
+   git clone https://github.com/GoSturtups/mail_service.git
+   ``` 
+   And go to mail_service directory:
+   ```sh
+   cd mail_service
    ```
 2. If you want to install docker and create certificates:
    1. Add DNS records for your domain
