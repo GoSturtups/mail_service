@@ -9,8 +9,5 @@ services:
       - .env
     restart: always
     volumes:
-      - fullchain.pem:${FULL_CHAIN}
-      - privkey.pem:${PRIV_KEY}
-volumes:
-  fullchain.pem:
-  privkey.pem:
+      - ${FULL_CHAIN}:${FULL_CHAIN}
+      - ${PRIV_KEY}:${PRIV_KEY}
