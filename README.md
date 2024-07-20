@@ -21,6 +21,11 @@ A service that allows email to be sent via a grpc interface and a third-party SM
    ```sh
    docker compose up -d
    ```
+   OR
+   Start app using sh script:
+    ```sh
+   sh start-app.sh
+   ```
 
 
 If you want to  Protobuf file is in proto/io/grpc/examples/mail/mail.proto directory.

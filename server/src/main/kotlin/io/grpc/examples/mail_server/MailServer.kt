@@ -12,14 +12,16 @@ import org.simplejavamail.mailer.MailerBuilder
 import java.io.File
 
 lateinit var mailer: Mailer
+lateinit var fullChainPath: String
+lateinit var privKeyPath: String
 
 class MailServer(private val port: Int) {
     val server: Server =
         ServerBuilder
             .forPort(port)
             .useTransportSecurity(
-                File("fullchain.pem"),
-                File("privkey.pem")
+                File(fullChainPath),
+                File(privKeyPath)
             )
             .addService(MailService())
             .build()
@@ -70,6 +72,11 @@ fun main() {
     val smtpPort = System.getenv("SMTP_PORT")!!.toInt()
     val login = System.getenv("SMTP_LOGIN")!!
     val password = System.getenv("SMTP_PASSWORD")!!
+
+    fullChainPath = System.getenv("FULL_CHAIN")!!
+    privKeyPath = System.getenv("PRIV_KEY")!!
+
+
     mailer = MailerBuilder
         .withTransportStrategy(TransportStrategy.SMTP_TLS)
         .withDebugLogging(true)
