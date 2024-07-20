@@ -16,6 +16,7 @@ message MailRequest {
     string subject = 4;
     string body = 5;
     repeated Attachment attachments = 6;
+    optional string references = 7;
 }
 
 // Сообщение для ответа с результатом выполнения

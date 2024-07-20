@@ -7,3 +7,4 @@ build/
 /client/build/
 /stub/build/
 /stub-lite/build/
+.env

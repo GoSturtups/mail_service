@@ -7,3 +7,10 @@ services:
       - "${PORT}:${PORT}"
     env_file:
       - .env
+    restart: always
+    volumes:
+      - fullchain.pem:${FULL_CHAIN}
+      - privkey.pem:${PRIV_KEY}
+volumes:
+  fullchain.pem:
+  privkey.pem:

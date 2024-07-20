@@ -9,6 +9,7 @@ import org.simplejavamail.api.mailer.Mailer
 import org.simplejavamail.api.mailer.config.TransportStrategy
 import org.simplejavamail.email.EmailBuilder
 import org.simplejavamail.mailer.MailerBuilder
+import java.io.File
 
 lateinit var mailer: Mailer
 
@@ -16,6 +17,10 @@ class MailServer(private val port: Int) {
     val server: Server =
         ServerBuilder
             .forPort(port)
+            .useTransportSecurity(
+                File("fullchain.pem"),
+                File("privkey.pem")
+            )
             .addService(MailService())
             .build()
 
@@ -46,7 +51,10 @@ class MailServer(private val port: Int) {
                 to(request.toAddress)
                 withSubject(request.subject)
                 withHTMLText(request.body)
-                withHeader("References", getRandomString(16))
+                withHeader("References", request.references ?: getRandomString(16))
+                request.attachmentsList.forEach {
+                    withAttachment(it.filename, it.content.toByteArray(), it.contentType)
+                }
             }.buildEmail()
 
             mailer.sendMail(email)

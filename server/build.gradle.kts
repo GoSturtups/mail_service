@@ -2,6 +2,7 @@ plugins {
     application
     alias(libs.plugins.kotlin.jvm)
     alias(libs.plugins.jib)
+    id("com.github.johnrengelman.shadow") version "8.1.1"
 }
 
 kotlin {
@@ -58,4 +59,11 @@ jib {
     container {
         mainClass = "io.grpc.examples.mail_server.MailServerKt"
     }
+}
+
+// Required by the 'shadowJar' task
+project.setProperty("mainClassName", "io.grpc.examples.mail_server.MailServerKt")
+
+tasks.jar {
+    manifest.attributes["Main-Class"] = "io.grpc.examples.mail_server.MailServerKt"
 }
